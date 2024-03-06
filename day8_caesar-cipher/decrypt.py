@@ -11,7 +11,7 @@ def decrypt():
 
         letter_position = letters.index(character) + 1
         decrypted_letter_position = letter_position - shift_number
-        decrypted_letter_index = decrypted_letter_position - (26 * int(decrypted_letter_position / 26)) - 1
+        decrypted_letter_index = (decrypted_letter_position % 26) - 1
         return letters[decrypted_letter_index]
 
     decrypted_text = ""

@@ -11,7 +11,7 @@ def encrypt():
 
         letter_position = letters.index(character) + 1
         encrypted_letter_position = letter_position + shift_number
-        encrypted_letter_index = encrypted_letter_position - (26 * int(encrypted_letter_position / 26)) - 1
+        encrypted_letter_index = (encrypted_letter_position % 26) - 1
         return letters[encrypted_letter_index]
 
     encrypted_text = ""
