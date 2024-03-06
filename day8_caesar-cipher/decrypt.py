@@ -2,26 +2,20 @@ from repo import letters
 
 
 def decrypt():
-    decrypt_input = input("Type your message:\n").lower()
+    encrypted_text = input("Type your message:\n").lower()
     shift_number = int(input("Type the shift number:\n"))
 
-    def unshift_shifted_letter(
-        character,
-    ):
+    def unshift_encrypted_letter(character):
         if character not in letters:
             return character
 
-        letter_index = letters.index(character) + 1
-
-        unshifted_index = letter_index - shift_number + 26
-
-        shifted_letter_index = unshifted_index - (26 * int(unshifted_index / 26))
-
-        return letters[shifted_letter_index - 1]
+        letter_position = letters.index(character) + 1
+        decrypted_letter_position = letter_position - shift_number
+        decrypted_letter_index = decrypted_letter_position - (26 * int(decrypted_letter_position / 26)) - 1
+        return letters[decrypted_letter_index]
 
     decrypted_text = ""
-
-    for i in decrypt_input:
-        decrypted_text += unshift_shifted_letter(i)
+    for i in encrypted_text:
+        decrypted_text += unshift_encrypted_letter(i)
 
     print(f"Here's' your decoded result: {decrypted_text}")
