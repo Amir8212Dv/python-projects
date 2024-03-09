@@ -7,7 +7,7 @@ print(logo)
 
 
 def deal_card(hitter_cards):
-    """Randomly choices a card and updates user or dealer's cards list and points"""
+    """Randomly choices a card and updates user or computer's cards list and points"""
 
     card = random.choice(cards)
     cards.remove(card)
@@ -35,18 +35,18 @@ def calculate_points(cards):
     return points
 
 
-def print_table(user_cards, user_points, dealer_cards, show_all=False):
+def print_table(user_cards, user_points, computer_cards, show_all=False):
     """Prints the all data that user needs to see"""
 
     clear_lines(3)
     user_all_cards = user_cards["all"]
-    dealer_all_cards = dealer_cards["all"]
+    computer_all_cards = computer_cards["all"]
 
     print(f"Your cards: {user_all_cards}, current score: {user_points}")
     if show_all:
-        print(f"Computer cards: {dealer_all_cards}")
+        print(f"Computer cards: {computer_all_cards}")
     else:
-        print(f"Computer's first card: {dealer_all_cards[0]}")
+        print(f"Computer's first card: {computer_all_cards[0]}")
 
 
 def blackjack():
@@ -61,41 +61,41 @@ def blackjack():
 
     if user_points == 21:
         print("\n$$ BLACKJACK $$\n")
-        print_table(user_cards, user_points, dealer_cards, True)
+        print_table(user_cards, user_points, computer_cards, True)
         return
 
-    dealer_points = 0
-    dealer_cards = {"non_ace_cards": [], "ace_cards": [], "all": []}
+    computer_points = 0
+    computer_cards = {"non_ace_cards": [], "ace_cards": [], "all": []}
     for _ in range(2):
-        dealer_cards, dealer_points = deal_card(dealer_cards)
+        computer_cards, computer_points = deal_card(computer_cards)
 
-    print_table(user_cards, user_points, dealer_cards)
+    print_table(user_cards, user_points, computer_cards)
 
     while True:
         hit_or_stand = input("Enter 'h' to hit , enter 's' to stand : ")
         if hit_or_stand == "h":
             user_cards, user_points = deal_card(user_cards)
             if user_points > 21:
-                print_table(user_cards, user_points, dealer_cards, True)
+                print_table(user_cards, user_points, computer_cards, True)
                 print("\n/\ LOSE /\\\n")
                 return
             elif user_points == 21:
-                print_table(user_cards, user_points, dealer_cards, True)
+                print_table(user_cards, user_points, computer_cards, True)
                 print("\n$$ BLACKJACK $$\n")
                 return
             else:
-                print_table(user_cards, user_points, dealer_cards)
+                print_table(user_cards, user_points, computer_cards)
 
         elif hit_or_stand == "s":
-            while dealer_points < 17:
-                dealer_cards, dealer_points = deal_card(dealer_cards)
+            while computer_points < 17:
+                computer_cards, computer_points = deal_card(computer_cards)
 
-            print_table(user_cards, user_points, dealer_cards, True)
-            if dealer_points > 21 or user_points > dealer_points:
+            print_table(user_cards, user_points, computer_cards, True)
+            if computer_points > 21 or user_points > computer_points:
                 print("\n** WIN **\n")
-            elif user_points < dealer_points:
+            elif user_points < computer_points:
                 print("\n/\ LOSE /\\\n")
-            elif user_points == dealer_points:
+            elif user_points == computer_points:
                 print("\n__ DRAW __\n")
 
             return
