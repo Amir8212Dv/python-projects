@@ -6,7 +6,9 @@ from util import clear_lines
 print(logo)
 
 
-def hit(hitter_cards):
+def deal_card(hitter_cards):
+    """Randomly choices a card and updates user or dealer's cards list and points"""
+
     card = random.choice(cards)
     cards.remove(card)
 
@@ -22,6 +24,8 @@ def hit(hitter_cards):
 
 
 def calculate_points(cards):
+    """Calculates the total point"""
+
     points = sum(cards["non_ace_cards"])
     for _ in cards["ace_cards"]:
         if 11 + points > 21:
@@ -32,6 +36,8 @@ def calculate_points(cards):
 
 
 def print_table(user_cards, user_points, dealer_cards, show_all=False):
+    """Prints the all data that user needs to see"""
+
     clear_lines(3)
     user_all_cards = user_cards["all"]
     dealer_all_cards = dealer_cards["all"]
@@ -44,12 +50,14 @@ def print_table(user_cards, user_points, dealer_cards, show_all=False):
 
 
 def blackjack():
+    """Play one round of BlackJack"""
+
     random.shuffle(cards)
 
     user_points = 0
     user_cards = {"non_ace_cards": [], "ace_cards": [], "all": []}
     for _ in range(2):
-        user_cards, user_points = hit(user_cards)
+        user_cards, user_points = deal_card(user_cards)
 
     if user_points == 21:
         print("\n$$ BLACKJACK $$\n")
@@ -59,14 +67,14 @@ def blackjack():
     dealer_points = 0
     dealer_cards = {"non_ace_cards": [], "ace_cards": [], "all": []}
     for _ in range(2):
-        dealer_cards, dealer_points = hit(dealer_cards)
+        dealer_cards, dealer_points = deal_card(dealer_cards)
 
     print_table(user_cards, user_points, dealer_cards)
 
     while True:
         hit_or_stand = input("Enter 'h' to hit , enter 's' to stand : ")
         if hit_or_stand == "h":
-            user_cards, user_points = hit(user_cards)
+            user_cards, user_points = deal_card(user_cards)
             if user_points > 21:
                 print_table(user_cards, user_points, dealer_cards, True)
                 print("\n/\ LOSE /\\\n")
@@ -80,7 +88,7 @@ def blackjack():
 
         elif hit_or_stand == "s":
             while dealer_points < 17:
-                dealer_cards, dealer_points = hit(dealer_cards)
+                dealer_cards, dealer_points = deal_card(dealer_cards)
 
             print_table(user_cards, user_points, dealer_cards, True)
             if dealer_points > 21 or user_points > dealer_points:
