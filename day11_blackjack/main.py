@@ -3,8 +3,6 @@ from cards import cards, ace
 import random
 from util import clear_lines
 
-print(logo)
-
 
 def deal_card(hitter_cards):
     """Randomly choices a card and updates user or computer's cards list and points"""
@@ -52,6 +50,7 @@ def print_table(user_cards, user_points, computer_cards, show_all=False):
 def blackjack():
     """Play one round of BlackJack"""
 
+    print(logo)
     random.shuffle(cards)
 
     user_points = 0
@@ -59,21 +58,21 @@ def blackjack():
     for _ in range(2):
         user_cards, user_points = deal_card(user_cards)
 
-    if user_points == 21:
-        print("\n$$ BLACKJACK $$\n")
-        print_table(user_cards, user_points, computer_cards, True)
-        return
-
     computer_points = 0
     computer_cards = {"non_ace_cards": [], "ace_cards": [], "all": []}
     for _ in range(2):
         computer_cards, computer_points = deal_card(computer_cards)
 
+    if user_points == 21:
+        print("\n$$ BLACKJACK $$\n")
+        print_table(user_cards, user_points, computer_cards, True)
+        return
+
     print_table(user_cards, user_points, computer_cards)
 
     while True:
-        hit_or_stand = input("Enter 'h' to hit , enter 's' to stand : ")
-        if hit_or_stand == "h":
+        hit_or_stand = input("Type 'y' to get another card, type 'n' to pass: ")
+        if hit_or_stand == "y":
             user_cards, user_points = deal_card(user_cards)
             if user_points > 21:
                 print_table(user_cards, user_points, computer_cards, True)
@@ -86,7 +85,7 @@ def blackjack():
             else:
                 print_table(user_cards, user_points, computer_cards)
 
-        elif hit_or_stand == "s":
+        elif hit_or_stand == "n":
             while computer_points < 17:
                 computer_cards, computer_points = deal_card(computer_cards)
 
@@ -103,4 +102,6 @@ def blackjack():
             clear_lines(1)
 
 
-blackjack()
+while input("Do you want to play another round of Blackjack? type 'y' or 'n': ") == "y":
+    clear_lines(100)
+    blackjack()
