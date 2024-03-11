@@ -1,18 +1,21 @@
 from game_data import data
 import random
 from util import clear_lines
-from logo import HIGHER_LOWER_LOGO,VS_LOGO
+from logo import HIGHER_LOWER_LOGO, VS_LOGO
 
 print(HIGHER_LOWER_LOGO)
 
+
 def print_opponent_data(opponent):
     print("Compare A: {}, a {}, from {}".format(opponent["name"], opponent["description"], opponent["country"]))
+
 
 def take_opponent():
     opponent_index = random.randint(0, len(data) - 1)
     opponent = data[opponent_index]
     del data[opponent_index]
     return opponent
+
 
 def higher_lower_game(first_opponent=None, total_score=0):
     if first_opponent == None:
@@ -26,8 +29,8 @@ def higher_lower_game(first_opponent=None, total_score=0):
     user_chosen_opponent = first_opponent
     other_opponent = second_opponent
     while True:
-        user_answer = input("Who has more followers on instagram? Type 'A' or 'B': ").lower()
-        clear_lines(1)
+        user_answer = input("\n\nWho has more followers on instagram? Type 'A' or 'B': ").lower()
+        clear_lines(3)
         if user_answer == "b":
             user_chosen_opponent = second_opponent
             other_opponent = first_opponent
