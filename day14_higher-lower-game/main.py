@@ -6,8 +6,12 @@ from logo import HIGHER_LOWER_LOGO, VS_LOGO
 print(HIGHER_LOWER_LOGO)
 
 
-def print_account_data(account):
-    print("Compare A: {}, a {}, from {}".format(account["name"], account["description"], account["country"]))
+def print_account_data(account, account_flag):
+    print(
+        "Compare {}: {}, a {}, from {}".format(
+            account_flag, account["name"], account["description"], account["country"]
+        )
+    )
 
 
 def take_account():
@@ -22,9 +26,9 @@ def higher_lower_game(first_account=None, total_score=0):
         first_account = take_account()
     second_account = take_account()
 
-    print_account_data(first_account)
+    print_account_data(first_account, "A")
     print(VS_LOGO)
-    print_account_data(second_account)
+    print_account_data(second_account, "B")
 
     user_chosen_account = first_account
     other_account = second_account
@@ -41,7 +45,7 @@ def higher_lower_game(first_account=None, total_score=0):
     if user_chosen_account["follower_count"] > other_account["follower_count"]:
         clear_lines(9 + int(bool(total_score)))
         print(f"You're right! Current score: {total_score + 1}")
-        higher_lower_game(user_chosen_account, total_score + 1)
+        higher_lower_game(second_account, total_score + 1)
     else:
         clear_lines(9 + int(bool(total_score)))
         print(f"Sorry, that's wrong. Final score {total_score}")
