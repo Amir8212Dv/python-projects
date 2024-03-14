@@ -28,9 +28,9 @@ def get_coins(order):
 
 
 def make_coffee(order):
-    required_resources = MENU[order]["ingredients"]
-    for resource_name in required_resources:
-        resources[resource_name] -= required_resources[resource_name]
+    order_ingredients = MENU[order]["ingredients"]
+    for resource_name in order_ingredients:
+        resources[resource_name] -= order_ingredients[resource_name]
     print(f"Here's your ☕{order}. Enjoy!")
 
 
@@ -52,9 +52,9 @@ def handle_order_payment(user_order):
 
 
 def check_resources_sufficiency(user_order):
-    required_resources = MENU[user_order]["ingredients"]
-    for resource_name in required_resources:
-        if required_resources[resource_name] > resources[resource_name]:
+    order_ingredients = MENU[user_order]["ingredients"]
+    for resource_name in order_ingredients:
+        if order_ingredients[resource_name] > resources[resource_name]:
             print(f"Sorry there is not enough {resource_name}.")
             return False
     return True
