@@ -1,25 +1,16 @@
 from turtle import Turtle, Screen
+from util import generate_random_rgb
 
 the_turtle = Turtle("arrow")
-the_turtle.color("black")
+the_turtle.speed(5)
 the_turtle.pu()
 the_turtle.sety(450)
 the_turtle.pd()
-the_turtle.speed(5)
-
-colors = [
-    "blue",
-    "green",
-    "red",
-    "yellow",
-    "orange",
-    "brown",
-    "black",
-]
 the_turtle.pensize(5)
 
+
 for shape_sides_number in range(3, 10):
-    the_turtle.color(colors[shape_sides_number - 3])
+    the_turtle.color(generate_random_rgb())
     side_angle = 360 / shape_sides_number
 
     for i in range(shape_sides_number):

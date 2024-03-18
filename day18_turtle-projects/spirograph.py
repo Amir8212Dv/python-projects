@@ -1,6 +1,5 @@
 from turtle import Turtle, Screen, colormode
-import random
-
+from util import generate_random_rgb
 
 the_turtle = Turtle("arrow")
 the_turtle.speed("fastest")
@@ -8,13 +7,6 @@ the_turtle.pensize(1)
 colormode(255)
 
 screen = Screen()
-
-
-def generate_random_rgb():
-    r = random.randint(0, 255)
-    g = random.randint(0, 255)
-    b = random.randint(0, 255)
-    return r, g, b
 
 
 number_of_circles = 120
