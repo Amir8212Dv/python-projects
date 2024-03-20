@@ -63,13 +63,17 @@ class Snake:
         head_hit_the_vrt_wall = (SCREEN_HEIGHT / 2) - abs(self.head_pos[1]) < 15
         if head_hit_the_vrt_wall:
             if self.easyMode:
-                self.head_pos = (self.head_pos[0], (self.head_pos[1] * -1) + 10)
+                old_y = self.head_pos[1]
+                new_y = (old_y * -1) + (50 * (old_y / abs(old_y)))  # f(Y)= -Y + (50Y / |Y|)
+                self.head_pos = (self.head_pos[0], new_y)
             return True
 
         head_hit_the_hor_wall = (SCREEN_WIDTH / 2) - abs(self.head_pos[0]) < 20
         if head_hit_the_hor_wall:
             if self.easyMode:
-                self.head_pos = ((self.head_pos[0] * -1) + 10, self.head_pos[1])
+                old_x = self.head_pos[0]
+                new_x = (old_x * -1) + (50 * (old_x / abs(old_x)))  # f(X)= -X + (50X / |X|)
+                self.head_pos = (new_x, self.head_pos[1])
             return True
 
         return False
