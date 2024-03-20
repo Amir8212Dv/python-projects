@@ -40,7 +40,7 @@ class Snake:
         return is_snake_alive
 
     def remove_tale(self):
-        """Removes snake tale position and returns it"""
+        """Removes snake tale position and saves the position in attribute"""
 
         snake_tale = self.segments_pos[0]
         self.segments_pos.remove(snake_tale)
