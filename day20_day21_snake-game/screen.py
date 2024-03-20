@@ -16,19 +16,19 @@ class GameScreen:
         self.set_event_listeners()
 
     def turn_up(self):
-        if self.move_steps[1] == 0:
+        if self.move_steps[1] == 0:  # If it's heading down, don't turn up
             self.move_steps = (0, MOVE_STEP_SIZE)
 
     def turn_down(self):
-        if self.move_steps[1] == 0:
+        if self.move_steps[1] == 0:  # If it's heading up, don't turn down
             self.move_steps = (0, -MOVE_STEP_SIZE)
 
     def turn_right(self):
-        if self.move_steps[0] == 0:
+        if self.move_steps[0] == 0:  # If it's heading left, don't turn right
             self.move_steps = (MOVE_STEP_SIZE, 0)
 
     def turn_left(self):
-        if self.move_steps[0] == 0:
+        if self.move_steps[0] == 0:  # If it's heading right, don't turn left
             self.move_steps = (-MOVE_STEP_SIZE, 0)
 
     def refresh(self):
