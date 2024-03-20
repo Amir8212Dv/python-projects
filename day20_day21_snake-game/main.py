@@ -5,7 +5,7 @@ from snake import Snake
 from util import calculate_snake_distance_from_point
 
 screen = GameScreen()
-snake = Snake()
+snake = Snake(screen.easyMode)
 score = Score()
 food = Food()
 

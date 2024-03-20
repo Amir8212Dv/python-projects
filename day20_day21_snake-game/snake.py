@@ -3,10 +3,11 @@ from constants import SCREEN_HEIGHT, SCREEN_WIDTH
 
 
 class Snake:
-    def __init__(self):
+    def __init__(self, easyMode: bool):
         self.segments_pos = []
         self.segments = []  # [tale , body , head]
         self.last_removed_tale_pos = None
+        self.easyMode = easyMode
 
         for i in range(15):
             self.generate_new_segment(backward=i * 20)
@@ -51,13 +52,27 @@ class Snake:
             self.segments[injured_segment_index].color("red")
             return False
 
-        head_hit_the_hor_wall = (SCREEN_WIDTH / 2) - abs(self.head_pos[0]) < 20
-        head_hit_the_vrt_wall = (SCREEN_HEIGHT / 2) - abs(self.head_pos[1]) < 15
-        if head_hit_the_hor_wall or head_hit_the_vrt_wall:
+        did_snake_hit_wall = self.check_snake_hit_the_wall()
+        if did_snake_hit_wall and not self.easyMode:
             self.segments[-1].color("red")
             return False
 
         return True
+
+    def check_snake_hit_the_wall(self):
+        head_hit_the_vrt_wall = (SCREEN_HEIGHT / 2) - abs(self.head_pos[1]) < 15
+        if head_hit_the_vrt_wall:
+            if self.easyMode:
+                self.head_pos = (self.head_pos[0], (self.head_pos[1] * -1) + 10)
+            return True
+
+        head_hit_the_hor_wall = (SCREEN_WIDTH / 2) - abs(self.head_pos[0]) < 20
+        if head_hit_the_hor_wall:
+            if self.easyMode:
+                self.head_pos = ((self.head_pos[0] * -1) + 10, self.head_pos[1])
+            return True
+
+        return False
 
     def move_snake_segments(self):
         for i in range(len(self.segments)):

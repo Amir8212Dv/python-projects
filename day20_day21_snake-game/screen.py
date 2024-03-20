@@ -10,6 +10,7 @@ class GameScreen:
         screen.setup(width=SCREEN_WIDTH, height=SCREEN_HEIGHT)
         screen.title("Snake Game")
         screen.tracer(0)
+        self.easyMode = screen.textinput(title="Game Mode" ,prompt="easy or hard? ").lower() == "easy"
 
         self.move_steps = (MOVE_STEP_SIZE, 0)
         self.screen = screen
