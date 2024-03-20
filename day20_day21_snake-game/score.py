@@ -11,12 +11,12 @@ class Score:
         score_turtle.color("white")
         self.score_turtle = score_turtle
         self.score = 0
-        self.print_score()
+        self.update_board()
 
-    def gain_score(self):
+    def gain(self):
         self.score += 1
-        self.print_score()
+        self.update_board()
 
-    def print_score(self):
+    def update_board(self):
         self.score_turtle.clear()
         self.score_turtle.write(f"Score : {self.score}", False, "left", ("Arial", 15, "normal"))

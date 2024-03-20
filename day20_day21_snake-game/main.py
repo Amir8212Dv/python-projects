@@ -16,7 +16,7 @@ while is_snake_alive:
     is_snake_alive = snake.move(screen.move_steps)
 
     if calculate_snake_distance_from_point(snake.head_pos, food.pos) < 15:
-        score.gain_score()
+        score.gain()
         food.update_position()
         snake.generate_new_segment()
 
