@@ -12,7 +12,6 @@ food = Food()
 
 is_snake_alive = True
 while is_snake_alive:
-    screen.refresh()
 
     is_snake_alive = snake.move(screen.move_steps)
 
@@ -20,6 +19,8 @@ while is_snake_alive:
         score.gain_score()
         food.update_food_position()
         snake.generate_new_segment()
+
+    screen.refresh()
 
 
 screen.screen.exitonclick()

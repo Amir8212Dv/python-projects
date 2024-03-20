@@ -8,7 +8,7 @@ class Snake:
         self.segments = []  # [tale , body , head]
         self.last_removed_tale_pos = None
 
-        for i in range(3):
+        for i in range(15):
             self.generate_new_segment(backward=i * 20)
         self.head_pos = self.segments_pos[-1]
 
@@ -47,11 +47,14 @@ class Snake:
 
     def check_snake_alive(self):
         if self.head_pos in self.segments_pos:
+            injured_segment_index = self.segments_pos.index(self.head_pos) - 1
+            self.segments[injured_segment_index].color("red")
             return False
 
         head_hit_the_hor_wall = (SCREEN_WIDTH / 2) - abs(self.head_pos[0]) < 20
         head_hit_the_vrt_wall = (SCREEN_HEIGHT / 2) - abs(self.head_pos[1]) < 15
         if head_hit_the_hor_wall or head_hit_the_vrt_wall:
+            self.segments[-1].color("red")
             return False
 
         return True
