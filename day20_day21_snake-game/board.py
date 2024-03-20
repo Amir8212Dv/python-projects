@@ -2,7 +2,7 @@ from turtle import Turtle
 from constants import SCREEN_HEIGHT
 
 
-class Score(Turtle):
+class Board(Turtle):
     def __init__(self):
         super().__init__()
 
@@ -11,12 +11,16 @@ class Score(Turtle):
         self.hideturtle()
         self.goto(-30, SCREEN_HEIGHT / 2 - 50)
         self.color("white")
-        self.update_board()
+        self.print_score()
 
-    def gain(self):
+    def increase_score(self):
         self.score += 1
-        self.update_board()
+        self.print_score()
 
-    def update_board(self):
+    def print_score(self):
         self.clear()
         self.write(f"Score : {self.score}", False, "left", ("Arial", 15, "normal"))
+
+    def game_over(self):
+        self.goto(0, 0)
+        self.write(f"Game Over", False, "center", ("Arial", 15, "normal"))

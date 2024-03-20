@@ -9,7 +9,7 @@ class Snake:
         self.last_removed_tale_pos = None
         self.easyMode = easyMode
 
-        for i in range(15):
+        for i in range(3):
             self.generate_new_segment(backward=i * 20)
         self.head_pos = self.segments_pos[-1]
 
