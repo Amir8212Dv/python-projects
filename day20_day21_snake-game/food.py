@@ -17,4 +17,3 @@ class Food(Turtle):
         pos_x = random.randint(-SCREEN_WIDTH / 2 + 30, SCREEN_WIDTH / 2 - 30)
         pos_y = random.randint(-SCREEN_HEIGHT / 2 + 30, SCREEN_HEIGHT / 2 - 30)
         self.goto(pos_x, pos_y)
-        self.pos = (pos_x, pos_y)
