@@ -1,6 +1,6 @@
 from turtle import Turtle
 import random
-from data import SCREEN_WIDTH, SCREEN_HEIGHT
+from constants import SCREEN_WIDTH, SCREEN_HEIGHT
 
 
 class Food:

@@ -1,5 +1,5 @@
 from turtle import Turtle
-from data import SCREEN_HEIGHT, SCREEN_WIDTH
+from constants import SCREEN_HEIGHT, SCREEN_WIDTH
 
 
 class Snake:
@@ -25,14 +25,16 @@ class Snake:
         self.segments.insert(0, segment)
         self.segments_pos.insert(0, segment.pos())
 
-    def update_head_position(self, x_change, y_change):
-        """Updates snake's head position and check's if snake is still alive or not and returns the result"""
+    def move(self, move_steps):
+        """Move snake body and update positions and check if snake is still alive or not and return the result"""
 
-        self.head_pos = (self.head_pos[0] + x_change, self.head_pos[1] + y_change)
+        self.head_pos = (self.head_pos[0] + move_steps[0], self.head_pos[1] + move_steps[1])
         is_snake_alive = self.check_snake_alive()
 
         self.segments_pos.append(self.head_pos)
         self.remove_tale()
+
+        self.move_snake_segments()
 
         return is_snake_alive
 
@@ -48,8 +50,14 @@ class Snake:
             return False
 
         head_hit_the_hor_wall = (SCREEN_WIDTH / 2) - abs(self.head_pos[0]) < 20
-        head_hit_the_vrt_wall = (SCREEN_HEIGHT) / 2 - abs(self.head_pos[1]) < 15
+        head_hit_the_vrt_wall = (SCREEN_HEIGHT / 2) - abs(self.head_pos[1]) < 15
         if head_hit_the_hor_wall or head_hit_the_vrt_wall:
             return False
+
+        return True
+
+    def move_snake_segments(self):
+        for i in range(len(self.segments)):
+            self.segments[i].goto(self.segments_pos[i])
 
         return True

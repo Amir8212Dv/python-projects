@@ -1,5 +1,5 @@
 from turtle import Turtle
-from data import SCREEN_HEIGHT
+from constants import SCREEN_HEIGHT
 
 
 class Score:
