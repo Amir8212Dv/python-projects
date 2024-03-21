@@ -28,42 +28,42 @@ class Ball(Turtle):
 
     def start_moving(self):
         while self.game_is_on:
-            self.forward(20)
+            # self.forward(20)
             ball_x, ball_y = self.pos()
             paddle_x, paddle_y = self.active_paddle.pos()
 
             heading = self.heading()
-            if abs(paddle_x - ball_x) < 20 and abs(paddle_y - ball_y) < 70:
+            if abs(paddle_x - ball_x) < 20 and abs(paddle_y - ball_y) < 70:  # If ball hits the active paddle
                 self.setheading(180 - heading + random.randint(-5, 5))
-                self.forward(50)
                 self.switch_active_paddle()
             elif SCREEN_HEIGHT / 2 - ball_y < 30:  # If ball hits the Upper Wall
                 extra_curvature = 0
-                if heading < 20:
+                if heading < 20:  # Left to Right reflection
                     extra_curvature = -(random.randint(10, 20))
-                elif heading < 40:
+                elif heading < 40:  # Left to Right reflection
                     extra_curvature = -(random.randint(0, 5))
-                elif heading > 160:
+                elif heading > 160:  # Right to Left reflection
                     extra_curvature = random.randint(10, 20)
-                elif heading < 140:
+                elif heading < 140:  # Right to left reflection
                     extra_curvature = random.randint(0, 5)
 
                 self.setheading(360 - heading + extra_curvature)
-                self.forward(20)
             elif SCREEN_HEIGHT / 2 + ball_y < 30:  # If ball hits the Lower Wall
+                # If the reflection angle is too obtuse, make it less obtuse
                 extra_curvature = 0
-                if heading < 200:
+                if heading < 200:  # Right to Left reflection
                     extra_curvature = -(random.randint(10, 20))
-                elif heading < 220:
+                elif heading < 220:  # Right to Left reflection
                     extra_curvature = -(random.randint(0, 5))
-                elif heading > 340:
+                elif heading > 340:  # Left to Right reflection
                     extra_curvature = random.randint(10, 20)
-                elif heading < 320:
+                elif heading < 320:  # Left to Right reflection
                     extra_curvature = random.randint(0, 5)
 
                 self.setheading(360 - heading + extra_curvature)
-                self.forward(20)
-            elif SCREEN_WIDTH / 2 - abs(ball_x) < 20:
+            elif SCREEN_WIDTH / 2 - abs(ball_x) < 20:  # If ball hits the vertical wall
                 print("YOU LOSE")
                 break
+
+            self.forward(20)
             self.refresh_screen()
