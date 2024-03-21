@@ -6,21 +6,29 @@ class Board(Turtle):
     def __init__(self):
         super().__init__()
 
-        self.score = 0
+        self.left_score = 0
+        self.right_score = 0
         self.pu()
         self.hideturtle()
-        self.goto(-30, SCREEN_HEIGHT / 2 - 50)
         self.color("white")
-        self.print_score()
+        self.goto(0, SCREEN_HEIGHT / 2 - 70)
+        self.update_scores()
 
-    def increase_score(self):
-        self.score += 1
-        self.print_score()
+        line_turtle = Turtle()
+        line_turtle.pu()
+        line_turtle.hideturtle()
+        line_turtle.color("white")
+        line_turtle.goto(0, -SCREEN_HEIGHT / 2)
+        line_turtle.write("|\n" * 100, False, "center", ("Courier", 10, "normal"))
 
-    def print_score(self):
+    def increase_left_score(self):
+        self.left_score += 1
+        self.update_scores()
+
+    def increase_right_score(self):
+        self.right_score += 1
+        self.update_scores()
+
+    def update_scores(self):
         self.clear()
-        self.write(f"Score : {self.score}", False, "left", ("Arial", 15, "normal"))
-
-    def game_over(self):
-        self.goto(0, 0)
-        self.write(f"Game Over", False, "center", ("Arial", 15, "normal"))
+        self.write(f"{self.left_score}      {self.right_score}", False, "center", ("Courier", 50, "normal"))

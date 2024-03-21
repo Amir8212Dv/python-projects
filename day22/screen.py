@@ -12,6 +12,7 @@ class GameScreen:
         screen.tracer(0)
 
         self.screen = screen
+        self.game_speed = 0.1
         self.set_event_listeners()
 
     def set_paddles(self, left_paddle, right_paddle):
@@ -29,7 +30,11 @@ class GameScreen:
 
     def refresh(self):
         self.screen.update()
-        time.sleep(0.1)
+        time.sleep(self.game_speed)
+
+    def increase_game_speed(self):
+        """Increases the game speed by 1%"""
+        self.game_speed -= self.game_speed / 100 
 
     def set_event_listeners(self):
         self.screen.listen()
