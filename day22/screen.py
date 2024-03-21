@@ -34,7 +34,7 @@ class GameScreen:
 
     def increase_game_speed(self):
         """Increases the game speed by 1%"""
-        self.game_speed -= self.game_speed / 100 
+        self.game_speed *= 0.99
 
     def set_event_listeners(self):
         self.screen.listen()
