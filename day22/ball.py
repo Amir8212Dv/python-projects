@@ -12,7 +12,7 @@ class Ball(Turtle):
         self.pu()
         self.speed("fastest")
 
-        initial_headings = [random.randint(110, 160), random.randint(200, 250)]
+        initial_headings = [random.randint(140, 170), random.randint(190, 220)]
         self.setheading(random.choice(initial_headings))
 
         self.game_is_on = True
@@ -34,27 +34,35 @@ class Ball(Turtle):
 
             heading = self.heading()
             if abs(player_x - ball_x) < 20 and abs(player_y - ball_y) < 70:
-                self.setheading(180 - heading)
+                self.setheading(180 - heading + random.randint(-5, 5))
                 self.forward(50)
                 self.switch_player_turn()
-            elif SCREEN_HEIGHT / 2 - ball_y < 30:  # Upper wall
+            elif SCREEN_HEIGHT / 2 - ball_y < 30:  # If ball hits the Upper Wall
                 extra_curvature = 0
                 if heading < 20:
                     extra_curvature = -(random.randint(10, 20))
+                elif heading < 40:
+                    extra_curvature = -(random.randint(0, 5))
                 elif heading > 160:
                     extra_curvature = random.randint(10, 20)
+                elif heading < 140:
+                    extra_curvature = random.randint(0, 5)
 
                 self.setheading(360 - heading + extra_curvature)
-                self.forward(50)
-            elif SCREEN_HEIGHT / 2 + ball_y < 30:  # Lower wll
+                self.forward(20)
+            elif SCREEN_HEIGHT / 2 + ball_y < 30:  # If ball hits the Lower Wall
                 extra_curvature = 0
                 if heading < 200:
                     extra_curvature = -(random.randint(10, 20))
+                elif heading < 220:
+                    extra_curvature = -(random.randint(0, 5))
                 elif heading > 340:
                     extra_curvature = random.randint(10, 20)
+                elif heading < 320:
+                    extra_curvature = random.randint(0, 5)
 
                 self.setheading(360 - heading + extra_curvature)
-                self.forward(50)
+                self.forward(20)
             elif SCREEN_WIDTH / 2 - abs(ball_x) < 20:
                 print("YOU LOSE")
                 break

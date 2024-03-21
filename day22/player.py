@@ -16,9 +16,9 @@ class Player(Turtle):
     def move_up(self):
         x,y = self.pos()
         if SCREEN_HEIGHT / 2 - 50 > y:
-            self.goto(x, y + 20)
+            self.goto(x, y + 40)
 
     def move_down(self):
         x,y = self.pos()
         if SCREEN_HEIGHT / 2 - 60 > -y:
-            self.goto(x, y - 20)
+            self.goto(x, y - 40)
