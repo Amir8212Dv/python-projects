@@ -4,7 +4,7 @@ import random
 
 
 class Ball(Turtle):
-    def __init__(self, left_player, right_player, refresh_screen, screen_switch_player):
+    def __init__(self, left_paddle, right_paddle, refresh_screen, screen_switch_active_paddle):
         super().__init__()
 
         self.color("white")
@@ -16,27 +16,27 @@ class Ball(Turtle):
         self.setheading(random.choice(initial_headings))
 
         self.game_is_on = True
-        self.player_turn = left_player
-        self.waiting_player = right_player
+        self.active_paddle = left_paddle
+        self.inactive_paddle = right_paddle
         self.refresh_screen = refresh_screen
-        self.screen_switch_player = screen_switch_player
+        self.screen_switch_active_paddle = screen_switch_active_paddle
         self.start_moving()
 
-    def switch_player_turn(self):
-        self.player_turn, self.waiting_player = self.waiting_player, self.player_turn
-        self.screen_switch_player()
+    def switch_active_paddle(self):
+        self.active_paddle, self.inactive_paddle = self.inactive_paddle, self.active_paddle
+        self.screen_switch_active_paddle()
 
     def start_moving(self):
         while self.game_is_on:
             self.forward(20)
             ball_x, ball_y = self.pos()
-            player_x, player_y = self.player_turn.pos()
+            paddle_x, paddle_y = self.active_paddle.pos()
 
             heading = self.heading()
-            if abs(player_x - ball_x) < 20 and abs(player_y - ball_y) < 70:
+            if abs(paddle_x - ball_x) < 20 and abs(paddle_y - ball_y) < 70:
                 self.setheading(180 - heading + random.randint(-5, 5))
                 self.forward(50)
-                self.switch_player_turn()
+                self.switch_active_paddle()
             elif SCREEN_HEIGHT / 2 - ball_y < 30:  # If ball hits the Upper Wall
                 extra_curvature = 0
                 if heading < 20:

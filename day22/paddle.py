@@ -1,7 +1,7 @@
 from turtle import Turtle
 from constants import SCREEN_HEIGHT,SCREEN_WIDTH
 
-class Player(Turtle):
+class Paddle(Turtle):
     def __init__(self, side: str):
         super().__init__()
         self.color("white")

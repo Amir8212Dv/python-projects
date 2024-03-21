@@ -14,28 +14,18 @@ class GameScreen:
         self.screen = screen
         self.set_event_listeners()
 
-    def set_players(self, left_player, right_player):
-        self.right_player = right_player
-        self.left_player = left_player
-        # self.which_player_moves = self.left_player
-        self.player_turn = left_player
-        self.waiting_player = right_player
-        
+    def set_paddles(self, left_paddle, right_paddle):
+        self.active_paddle = left_paddle
+        self.inactive_paddle = right_paddle
 
     def move_up(self):
-        self.player_turn.move_up()
+        self.active_paddle.move_up()
 
     def move_down(self):
-        self.player_turn.move_down()
+        self.active_paddle.move_down()
 
-    # def select_right_player(self):
-    #     self.which_player_moves = self.right_player
-
-    # def select_left_player(self):
-    #     self.which_player_moves = self.left_player
-
-    def switch_player_turn(self):
-        self.player_turn, self.waiting_player = self.waiting_player, self.player_turn
+    def switch_active_paddle(self):
+        self.active_paddle, self.inactive_paddle = self.inactive_paddle, self.active_paddle
 
     def refresh(self):
         self.screen.update()
@@ -45,5 +35,3 @@ class GameScreen:
         self.screen.listen()
         self.screen.onkey(fun=self.move_up, key="Up")
         self.screen.onkey(fun=self.move_down, key="Down")
-        # self.screen.onkeypress(fun=self.select_right_player, key="Right")
-        # self.screen.onkeypress(fun=self.select_left_player, key="Left")

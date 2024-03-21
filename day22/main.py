@@ -1,13 +1,13 @@
 from screen import GameScreen
-from player import Player
+from paddle import Paddle
 from ball import Ball
 
 screen = GameScreen()
-left_player = Player("left")
-right_player = Player("right")
+left_paddle = Paddle("left")
+right_paddle = Paddle("right")
 
-screen.set_players(left_player, right_player)
-ball = Ball(left_player, right_player, screen.refresh, screen.switch_player_turn)
+screen.set_paddles(left_paddle, right_paddle)
+ball = Ball(left_paddle, right_paddle, screen.refresh, screen.switch_active_paddle)
 screen.refresh()
 
 screen.screen.exitonclick()
