@@ -11,7 +11,9 @@ class Ball(Turtle):
         self.shape("circle")
         self.pu()
         self.speed("fastest")
-        self.setheading(180 + random.randint(10, 30))
+
+        initial_headings = [random.randint(110, 160), random.randint(200, 250)]
+        self.setheading(random.choice(initial_headings))
 
         self.game_is_on = True
         self.player_turn = left_player
@@ -35,21 +37,24 @@ class Ball(Turtle):
                 self.setheading(180 - heading)
                 self.forward(50)
                 self.switch_player_turn()
-            elif SCREEN_HEIGHT / 2 - ball_y < 30:
-                random_angle = 0
+            elif SCREEN_HEIGHT / 2 - ball_y < 30:  # Upper wall
+                extra_curvature = 0
                 if heading < 20:
-                    random_angle = random.randint(-20, -10)
+                    extra_curvature = -(random.randint(10, 20))
                 elif heading > 160:
-                    random_angle = random.randint(10, 20)
-                self.setheading(360 - heading + random_angle)
-            elif SCREEN_HEIGHT / 2 + ball_y < 30:
-                random_angle = 0
-                if heading < 200:
-                    random_angle = random.randint(-20, -10)
-                elif heading > 340:
-                    random_angle = random.randint(10, 20)
+                    extra_curvature = random.randint(10, 20)
 
-                self.setheading(360 - heading + random_angle)
+                self.setheading(360 - heading + extra_curvature)
+                self.forward(50)
+            elif SCREEN_HEIGHT / 2 + ball_y < 30:  # Lower wll
+                extra_curvature = 0
+                if heading < 200:
+                    extra_curvature = -(random.randint(10, 20))
+                elif heading > 340:
+                    extra_curvature = random.randint(10, 20)
+
+                self.setheading(360 - heading + extra_curvature)
+                self.forward(50)
             elif SCREEN_WIDTH / 2 - abs(ball_x) < 20:
                 print("YOU LOSE")
                 break
