@@ -25,7 +25,7 @@ while screen.is_game_on:
         snake.game_over()
         screen.refresh()
         time.sleep(3)
-        snake = Snake(snake.easyMode)
+        snake = Snake(screen.easyMode)
         board.reset()
 
     screen.refresh()
