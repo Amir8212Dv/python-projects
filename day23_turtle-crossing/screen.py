@@ -24,5 +24,5 @@ class GameScreen:
 
     def set_event_listeners(self, move_up_fn, move_down_fn):
         self.screen.listen()
-        self.screen.onkey(fun=move_up_fn, key="Up")
-        self.screen.onkey(fun=move_down_fn, key="Down")
+        self.screen.onkeypress(fun=move_up_fn, key="Up")
+        self.screen.onkeypress(fun=move_down_fn, key="Down")

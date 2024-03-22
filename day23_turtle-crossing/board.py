@@ -1,5 +1,5 @@
 from turtle import Turtle
-from constants import SCREEN_HEIGHT,SCREEN_WIDTH
+from constants import SCREEN_HEIGHT, SCREEN_WIDTH
 
 
 class Board(Turtle):
@@ -16,6 +16,10 @@ class Board(Turtle):
         self.level += 1
         self.update_board()
 
+    def game_over(self):
+        self.goto(0, 0)
+        self.write(f"GAME OVER", False, "center", ("Courier", 20, "normal"))
+
     def update_board(self):
         self.clear()
-        self.write(f"Level: {self.level}", False, "center", ("Arial", 20, "normal"))
+        self.write(f"Level: {self.level}", False, "center", ("Courier", 20, "normal"))

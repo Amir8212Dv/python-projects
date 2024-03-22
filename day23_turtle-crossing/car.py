@@ -11,14 +11,11 @@ class Car(Turtle):
         self.shapesize(1, 2, 1)
         self.pu()
         self.setheading(180)
-        self.change_color()
+        self.color(generate_random_rgb())
 
         x = random.randint(-SCREEN_WIDTH / 2, SCREEN_WIDTH / 2)
         y = self.generate_random_y()
         self.setpos(x, y)
-
-    def change_color(self):
-        self.color(generate_random_rgb())
 
     def reset_position(self):
         self.setpos(SCREEN_WIDTH / 2 + 50, self.generate_random_y())

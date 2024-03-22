@@ -27,12 +27,12 @@ while is_game_on:
     for car in cars:
         car.move()
         if turtle.distance(car) < 20:
-            print("YOU LOSE")
+            board.game_over()
+            turtle.game_over()
             is_game_on = False
 
         if car.xcor() < -SCREEN_WIDTH / 2:
             car.reset_position()
-            car.change_color()
 
     screen.refresh()
 
