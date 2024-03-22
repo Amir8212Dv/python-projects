@@ -83,3 +83,9 @@ class Snake:
             self.segments[i].goto(self.segments_pos[i])
 
         return True
+
+    def game_over(self):
+        for segment in self.segments:
+            segment.goto(SCREEN_WIDTH * 2, SCREEN_HEIGHT * 2)  # Put the dead snake out of screen
+        self.segments.clear()
+        self.segments_pos.clear()

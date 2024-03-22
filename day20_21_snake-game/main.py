@@ -3,15 +3,15 @@ from screen import GameScreen
 from board import Board
 from snake import Snake
 from util import calculate_two_points_distance
+import time
 
-screen = GameScreen()
-snake = Snake(screen.easyMode)
 board = Board()
+screen = GameScreen(board.game_over)
+snake = Snake(screen.easyMode)
 food = Food()
 
 
-is_snake_alive = True
-while is_snake_alive:
+while screen.is_game_on:
 
     is_snake_alive = snake.move(screen.move_steps)
 
@@ -20,7 +20,14 @@ while is_snake_alive:
         food.update_position()
         snake.generate_new_segment()
 
+    if not is_snake_alive:
+        board.game_over()
+        snake.game_over()
+        screen.refresh()
+        time.sleep(3)
+        snake = Snake(snake.easyMode)
+        board.reset()
+
     screen.refresh()
 
-board.game_over()
 screen.screen.exitonclick()

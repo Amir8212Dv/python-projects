@@ -33,6 +33,13 @@ class Board(Turtle):
     def game_over(self):
         self.goto(0, 0)
         self.write(f"Game Over", False, "center", ("Arial", 15, "normal"))
+
         if self.score > self.high_score:
+            self.high_score = self.score
             with open(HIGH_SCORE_FILE_PATH, "w") as high_score_file:
                 high_score_file.write(str(self.score))
+
+    def reset(self):
+        self.goto(-70, SCREEN_HEIGHT / 2 - 50)
+        self.score = 0
+        self.print_score()

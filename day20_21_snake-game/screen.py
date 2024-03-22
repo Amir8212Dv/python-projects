@@ -4,7 +4,7 @@ import time
 
 
 class GameScreen:
-    def __init__(self):
+    def __init__(self, game_over_fn):
         screen = Screen()
         screen.bgcolor("black")
         screen.setup(width=SCREEN_WIDTH, height=SCREEN_HEIGHT)
@@ -14,6 +14,8 @@ class GameScreen:
 
         self.move_steps = (MOVE_STEP_SIZE, 0)
         self.screen = screen
+        self.game_over_fn = game_over_fn
+        self.is_game_on = True
         self.set_event_listeners()
 
     def turn_up(self):
@@ -36,9 +38,15 @@ class GameScreen:
         self.screen.update()
         time.sleep(0.1)
 
+    def exit_game(self):
+        self.game_over_fn()
+        self.is_game_on = False
+        self.screen.bye()
+
     def set_event_listeners(self):
         self.screen.listen()
         self.screen.onkey(fun=self.turn_up, key="Up")
         self.screen.onkey(fun=self.turn_down, key="Down")
         self.screen.onkey(fun=self.turn_right, key="Right")
         self.screen.onkey(fun=self.turn_left, key="Left")
+        self.screen.onkey(fun=self.exit_game, key="Escape")
