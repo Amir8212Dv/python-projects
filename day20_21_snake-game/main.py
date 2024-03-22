@@ -23,8 +23,7 @@ while screen.is_game_on:
     if not is_snake_alive:
         board.game_over()
         snake.game_over()
-        screen.refresh()
-        time.sleep(3)
+        screen.game_over()
         snake = Snake(screen.easyMode)
         board.reset()
 

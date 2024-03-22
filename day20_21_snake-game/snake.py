@@ -48,7 +48,7 @@ class Snake:
         self.last_removed_tale_pos = snake_tale
 
     def check_snake_alive(self):
-        if len(self.segments) > self.initial_segments_count and self.head_pos in self.segments_pos[:-1]:
+        if len(self.segments) > self.initial_segments_count and self.head_pos in self.segments_pos:
             return False
 
         did_snake_hit_wall = self.check_snake_hit_the_wall()

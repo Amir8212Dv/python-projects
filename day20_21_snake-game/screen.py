@@ -38,6 +38,11 @@ class GameScreen:
         self.screen.update()
         time.sleep(0.1)
 
+    def game_over(self):
+        self.screen.update()
+        time.sleep(3)
+        self.move_steps = (MOVE_STEP_SIZE, 0)
+
     def exit_game(self):
         self.game_over_fn()
         self.is_game_on = False
