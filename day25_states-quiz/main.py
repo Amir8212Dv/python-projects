@@ -2,11 +2,11 @@ import pandas
 import turtle
 from state_turtle import StatesTurtle
 
-data = pandas.read_csv("50_states.csv")
+data = pandas.read_csv("data/50_states.csv")
 
 states_turtle = StatesTurtle()
 screen = turtle.Screen()
-screen.bgpic("blank_states_img.gif")
+screen.bgpic("data/blank_states_img.gif")
 screen.title("U.S. States game")
 screen.listen()
 
@@ -16,7 +16,7 @@ all_states_count = len(missing_states)
 
 def exit_quiz():
     missing_states_data = data[data.state.isin(missing_states)]
-    missing_states_data.to_csv("missing_states.csv")
+    missing_states_data.to_csv("data/missing_states.csv")
     missing_states.clear()
     screen.bye()
 
