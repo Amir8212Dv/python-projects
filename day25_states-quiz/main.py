@@ -8,6 +8,8 @@ states_turtle = StatesTurtle()
 screen = turtle.Screen()
 screen.bgpic("blank_states_img.gif")
 screen.title("U.S. States game")
+screen.listen()
+screen.onkey(fun=screen.bye, key="Escape")
 
 available_states_list = data.state.tolist()
 all_states_count = len(available_states_list)
