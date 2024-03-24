@@ -11,5 +11,5 @@ longest_len = len(str(numbers[-1]))
 for i in range(len(numbers)):
     item = numbers[i]
     diff = int((longest_len - len(str(item))) / 2)
-    log_string = str(item).replace(",", "   ").replace("[", "").replace("]", "")
-    print(" " * diff, log_string)
+    log_string = str(item).replace(",", "     ").replace("[", "").replace("]", "")
+    print(" " * (diff + len(numbers) - i), log_string , "\n")
