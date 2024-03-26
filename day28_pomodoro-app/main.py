@@ -1,29 +1,38 @@
 import tkinter
-from PIL import ImageTk, Image
 import time
 
-w = tkinter.Tk()
-w.minsize(width=700, height=700)
+YELLOW = "#f7f5dd"
+GREEN = "#9bdeac"
+RED = "#e7305b"
+PINK = "#e2979c"
+FONT_NAME = "Courier"
 
-timer_label = tkinter.Label(text="Timer", font=("Arial", 60))
+
+w = tkinter.Tk()
+w.config(bg=YELLOW)
+w.minsize(width=700, height=700)
+w.title("Pomodoro")
+
+timer_label = tkinter.Label(text="Timer", font=(FONT_NAME, 60))
 timer_label.place(x=250, y=50)
 
-timer = tkinter.Label(text="00:00", font=("Arial", 30, "bold"))
-timer.place(x=100, y=100)
-
-tomato = ImageTk.PhotoImage(Image.open("tomato.png"))
-l = tkinter.Label(text="00:00", image=tomato, fg="white")
-l.place(x=250, y=200)
+canvas = tkinter.Canvas(width=202, height=224, bg=YELLOW, highlightthickness=0)
+tomato_img = tkinter.PhotoImage(file="tomato.png")
+canvas.create_image(102, 112, image=tomato_img)
+timer = canvas.create_text(100, 112, text="00:00", fill="white", font=(FONT_NAME, 25, "bold"))
+canvas.place(x=250, y=200)
 
 
 def start():
+    global timer
     for i in range(60 * 25, 0, -1):
         m = str(i // 60)
         m = f"0{m}" if len(m) == 1 else m
         s = str(i % 60)
         s = f"0{s}" if len(s) == 1 else s
-        print(m, " : ", s)
-        timer_label.config(text=f"{m}:{s}")
+        canvas.delete(timer)
+        timer = canvas.create_text(100, 112, text=f"{m}:{s}", fill="white", font=(FONT_NAME, 25, "bold"))
+        w.update()
         time.sleep(1)
 
 
